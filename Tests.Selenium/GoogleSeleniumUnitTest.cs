@@ -43,18 +43,22 @@ namespace Tests.Selenium
         static IWebDriver driver;
 
         #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
+        /// <summary>
+        /// Initialize the Selenium web driver once per class.
+        /// You could do this once per test in a TestInitialize method to improve
+        /// isolation at the cost of additional processor and wall time.
+        /// </summary>
+        /// <param name="testContext">standard test context</param>
         [ClassInitialize()]
         public static void MyClassInitialize(TestContext testContext)
         {
             driver = new ChromeDriver();
         }
 
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
+        /// <summary>
+        /// Quit the driver so that tests classes can't impact each other.
+        /// Each test class creates its own driver.
+        /// </summary>
         [ClassCleanup()]
         public static void MyClassCleanup()
         {
@@ -72,6 +76,9 @@ namespace Tests.Selenium
         //
         #endregion
 
+        /// <summary>
+        /// Simple method that searches on google and verifies that the search term is in the title bar
+        /// </summary>
         [TestMethod]
         public void TestGoogleSearch()
         {

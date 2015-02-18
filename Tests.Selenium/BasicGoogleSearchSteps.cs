@@ -29,6 +29,7 @@ namespace Tests.Selenium
         {
             IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("driver");
             driver.Navigate().GoToUrl("http://www.google.com");
+            ScenarioContext.Current.Set<string>("q", "queryFieldName");
         }
 
         /// <summary>
@@ -38,9 +39,10 @@ namespace Tests.Selenium
         [When(@"When I search for ""(.*)""")]
         public void WhenWhenISearchFor(string p0)
         {
+            string queryFieldName = ScenarioContext.Current.Get<string>("queryFieldName");
             ScenarioContext.Current.Set<string>(p0, "lastSearch");
             IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("driver");
-            IWebElement queryField = driver.FindElement(By.Name("q"));
+            IWebElement queryField = driver.FindElement(By.Name(queryFieldName));
             queryField.SendKeys(p0);
             queryField.Submit();
             // how do we handle various delays hitting external web site?
@@ -58,5 +60,16 @@ namespace Tests.Selenium
             string title = driver.Title;
             StringAssert.Contains(title, lastSearch);
         }
+
+        [Given(@"I want to search with Bing")]
+        public void GivenIWantToSearchWithBing()
+        {
+            IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("driver");
+            driver.Navigate().GoToUrl("http://www.bing.com");
+            // google and bing use same search field name - ids are different
+            ScenarioContext.Current.Set<string>("q", "queryFieldName");
+        }
+
+
     }
 }
