@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Threading;
 using TechTalk.SpecFlow;
@@ -14,20 +15,20 @@ namespace Tests.Selenium
         public void BeforeScenario()
         {
             IWebDriver driver = new ChromeDriver();
-            ScenarioContext.Current.Set<IWebDriver>(driver, "driver");
+            ScenarioContext.Current.Set<IWebDriver>(driver, "Driver");
         }
 
         [AfterScenario]
         public void AfterScenario()
         {
-            IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("driver");
+            IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("Driver");
             driver.Quit();
         }
 
         [Given(@"I want to search with Google")]
         public void GivenIWantToSearchWithGoogle()
         {
-            IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("driver");
+            IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("Driver");
             driver.Navigate().GoToUrl("http://www.google.com");
             ScenarioContext.Current.Set<string>("q", "queryFieldName");
         }
@@ -41,12 +42,13 @@ namespace Tests.Selenium
         {
             string queryFieldName = ScenarioContext.Current.Get<string>("queryFieldName");
             ScenarioContext.Current.Set<string>(p0, "lastSearch");
-            IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("driver");
+            IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("Driver");
             IWebElement queryField = driver.FindElement(By.Name(queryFieldName));
             queryField.SendKeys(p0);
             queryField.Submit();
-            // how do we handle various delays hitting external web site?
-            Thread.Sleep(3000);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            // wait until the title comes up.  Should look for some field or other later component
+            wait.Until(d => d.Title.Contains(p0));
         }
 
         /// <summary>
@@ -56,7 +58,7 @@ namespace Tests.Selenium
         public void ThatShouldBeInTheTitleBar()
         {
             string lastSearch = ScenarioContext.Current.Get<string>("lastSearch");
-            IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("driver");
+            IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("Driver");
             string title = driver.Title;
             StringAssert.Contains(title, lastSearch);
         }
@@ -64,7 +66,7 @@ namespace Tests.Selenium
         [Given(@"I want to search with Bing")]
         public void GivenIWantToSearchWithBing()
         {
-            IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("driver");
+            IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("Driver");
             driver.Navigate().GoToUrl("http://www.bing.com");
             // google and bing use same search field name - ids are different
             ScenarioContext.Current.Set<string>("q", "queryFieldName");

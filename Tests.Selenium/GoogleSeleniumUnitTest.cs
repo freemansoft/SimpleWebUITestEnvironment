@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace Tests.Selenium
 {
@@ -15,66 +16,32 @@ namespace Tests.Selenium
     [TestClass]
     public class GoogleSeleniumUnitTest
     {
-        public GoogleSeleniumUnitTest()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
-        private TestContext testContextInstance;
+        private IWebDriver Driver;
+        private WebDriverWait WaitSupport;
 
         /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
-        static IWebDriver driver;
-
-        #region Additional test attributes
-        /// <summary>
-        /// Initialize the Selenium web driver once per class.
+        /// Initialize the Selenium web Driver once per class.
         /// You could do this once per test in a TestInitialize method to improve
         /// isolation at the cost of additional processor and wall time.
         /// </summary>
         /// <param name="testContext">standard test context</param>
-        [ClassInitialize()]
-        public static void MyClassInitialize(TestContext testContext)
+        [TestInitialize()]
+        public void MyTestInitialize()
         {
-            driver = new ChromeDriver();
+            Driver = new ChromeDriver();
+            WaitSupport = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
         }
 
         /// <summary>
-        /// Quit the driver so that tests classes can't impact each other.
-        /// Each test class creates its own driver.
+        /// Quit the Driver so that tests classes can't impact each other.
+        /// Each test class creates its own Driver.
         /// </summary>
-        [ClassCleanup()]
-        public static void MyClassCleanup()
+        [TestCleanup()]
+        public void MyTestCleanup()
         {
-            driver.Quit();
+            Driver.Quit();
         }
 
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
 
         /// <summary>
         /// Simple method that searches on google and verifies that the search term is in the title bar
@@ -82,13 +49,20 @@ namespace Tests.Selenium
         [TestMethod]
         public void TestGoogleSearch()
         {
-            driver.Navigate().GoToUrl("http://www.google.com");
-            IWebElement queryField = driver.FindElement(By.Name("q"));
+            Driver.Navigate().GoToUrl("http://www.google.com");
+            IWebElement queryField = Driver.FindElement(By.Name("q"));
             queryField.SendKeys("freemansoft");
             queryField.Submit();
-            // how do we handle various delays hitting external web site
-            Thread.Sleep(3000);
-            StringAssert.Contains(driver.Title, "freemansoft");
+            // WaitSupport until a link for the search term shows up before doing anything else
+            // google links don't have ids or names
+            Assert.IsNotNull(WaitSupport.Until(d => d.FindElement(By.LinkText("FreemanSoft Inc"))));
+            // google puts search term in title bar after search
+            StringAssert.Contains(Driver.Title, "freemansoft");
+            // find the link again and click on it to go to the home page
+            IWebElement link = Driver.FindElement(By.LinkText("FreemanSoft Inc"));
+            link.Click();
+            // check against the title of the home page of the site we went to
+            StringAssert.Contains(Driver.Title, "FreemanSoft Inc");
         }
     }
 }
