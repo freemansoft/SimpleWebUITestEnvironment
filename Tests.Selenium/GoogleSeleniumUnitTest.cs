@@ -20,9 +20,9 @@ namespace Tests.Selenium
         private WebDriverWait WaitSupport;
 
         /// <summary>
-        /// Initialize the Selenium web Driver once per class.
-        /// You could do this once per test in a TestInitialize method to improve
-        /// isolation at the cost of additional processor and wall time.
+        /// Initialize the Selenium web Driver once per test to totally isolate the tests.
+        /// You could do this once per class with better performance at the risk of
+        /// more cross test dependencies.
         /// </summary>
         /// <param name="testContext">standard test context</param>
         [TestInitialize()]
