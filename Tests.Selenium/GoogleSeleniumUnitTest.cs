@@ -55,14 +55,14 @@ namespace Tests.Selenium
             queryField.Submit();
             // WaitSupport until a link for the search term shows up before doing anything else
             // google links don't have ids or names
-            Assert.IsNotNull(WaitSupport.Until(d => d.FindElement(By.LinkText("FreemanSoft Inc"))));
+            Assert.IsNotNull(WaitSupport.Until(d => d.FindElement(By.PartialLinkText("Joe Freeman"))));
             // google puts search term in title bar after search
             StringAssert.Contains(Driver.Title, "freemansoft");
             // find the link again and click on it to go to the home page
-            IWebElement link = Driver.FindElement(By.LinkText("FreemanSoft Inc"));
+            IWebElement link = Driver.FindElement(By.PartialLinkText("joe.blog.freemansoft.com"));
             link.Click();
             // check against the title of the home page of the site we went to
-            StringAssert.Contains(Driver.Title, "FreemanSoft Inc");
+            StringAssert.Contains(Driver.Title, "Joe Freeman");
         }
     }
 }

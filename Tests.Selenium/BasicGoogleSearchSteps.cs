@@ -11,26 +11,35 @@ namespace Tests.Selenium
     [Binding]
     public class BasicGoogleSearchSteps
     {
+        ScenarioContext _scenarioContext;
+        FeatureContext _featureContext;
+
+        public BasicGoogleSearchSteps(ScenarioContext scenarioContext, FeatureContext featureContext)
+        {
+            _scenarioContext = scenarioContext;
+            _featureContext = featureContext;
+        }
+
         [BeforeScenario]
         public void BeforeScenario()
         {
             IWebDriver driver = new ChromeDriver();
-            ScenarioContext.Current.Set<IWebDriver>(driver, "Driver");
+            _scenarioContext.Set<IWebDriver>(driver, "Driver");
         }
 
         [AfterScenario]
         public void AfterScenario()
         {
-            IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("Driver");
+            IWebDriver driver = _scenarioContext.Get<IWebDriver>("Driver");
             driver.Quit();
         }
 
         [Given(@"I want to search with Google")]
         public void GivenIWantToSearchWithGoogle()
         {
-            IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("Driver");
+            IWebDriver driver = _scenarioContext.Get<IWebDriver>("Driver");
             driver.Navigate().GoToUrl("http://www.google.com");
-            ScenarioContext.Current.Set<string>("q", "queryFieldName");
+            _scenarioContext.Set<string>("q", "queryFieldName");
         }
 
         /// <summary>
@@ -40,9 +49,9 @@ namespace Tests.Selenium
         [When(@"When I search for ""(.*)""")]
         public void WhenWhenISearchFor(string p0)
         {
-            string queryFieldName = ScenarioContext.Current.Get<string>("queryFieldName");
-            ScenarioContext.Current.Set<string>(p0, "lastSearch");
-            IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("Driver");
+            string queryFieldName = _scenarioContext.Get<string>("queryFieldName");
+            _scenarioContext.Set<string>(p0, "lastSearch");
+            IWebDriver driver = _scenarioContext.Get<IWebDriver>("Driver");
             IWebElement queryField = driver.FindElement(By.Name(queryFieldName));
             queryField.SendKeys(p0);
             queryField.Submit();
@@ -57,8 +66,8 @@ namespace Tests.Selenium
         [Then(@"That should be in the title bar")]
         public void ThatShouldBeInTheTitleBar()
         {
-            string lastSearch = ScenarioContext.Current.Get<string>("lastSearch");
-            IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("Driver");
+            string lastSearch = _scenarioContext.Get<string>("lastSearch");
+            IWebDriver driver = _scenarioContext.Get<IWebDriver>("Driver");
             string title = driver.Title;
             StringAssert.Contains(title, lastSearch);
         }
@@ -66,10 +75,10 @@ namespace Tests.Selenium
         [Given(@"I want to search with Bing")]
         public void GivenIWantToSearchWithBing()
         {
-            IWebDriver driver = ScenarioContext.Current.Get<IWebDriver>("Driver");
+            IWebDriver driver = _scenarioContext.Get<IWebDriver>("Driver");
             driver.Navigate().GoToUrl("http://www.bing.com");
             // google and bing use same search field name - ids are different
-            ScenarioContext.Current.Set<string>("q", "queryFieldName");
+            _scenarioContext.Set<string>("q", "queryFieldName");
         }
 
 
