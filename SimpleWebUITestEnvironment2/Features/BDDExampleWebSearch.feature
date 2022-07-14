@@ -11,12 +11,14 @@ Scenario: Example - Search with Google
 	Given I want to search with "google"
 	When When I search for "microsoft"
 	Then My search term should be in the title bar
+	And There should be at least 10 links with the search term in thm
 	And I can click on the first link
 
 Scenario: Example - Search with Bing
 	Given I want to search with "bing"
 	When When I search for "microsoft"
 	Then My search term should be in the title bar
+	And There should be at least 10 links with the search term in thm
 	And I can click on the first link
 
 Scenario Outline: Example - Search and Title Matches

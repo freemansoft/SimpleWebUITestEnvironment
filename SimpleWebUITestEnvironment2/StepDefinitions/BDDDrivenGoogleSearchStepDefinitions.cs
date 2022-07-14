@@ -1,10 +1,7 @@
-using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-
-using TechTalk.SpecFlow;
 
 namespace SimpleWebUITestEnvironment2.StepDefinitions
 {
@@ -80,6 +77,15 @@ namespace SimpleWebUITestEnvironment2.StepDefinitions
             link.Click();
             // check against the title of the home page of the site we went to
             StringAssert.Contains(lastSearch.ToLower(), driver.Title.ToLower());
+        }
+
+        [Then(@"There should be at least (.*) links with the search term in thm")]
+        public void ThenThereShouldBeAtLeastLinksWithTheSearchTermInThm(int p0)
+        {
+            string lastSearch = _scenarioContext.Get<string>("lastSearch");
+            IWebDriver driver = _scenarioContext.Get<IWebDriver>("driver");
+            IReadOnlyCollection<IWebElement> links = driver.FindElements(By.PartialLinkText(lastSearch));
+            Assert.LessOrEqual(p0, links.Count);
         }
 
 
