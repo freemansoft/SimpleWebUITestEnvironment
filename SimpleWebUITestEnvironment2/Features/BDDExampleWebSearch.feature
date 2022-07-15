@@ -1,10 +1,10 @@
 ﻿# Sample Scenarios for Selenium based search tests.
 # Scenerio Names become the test names
 #
-# Feature name is the default step class name
+# Feature name appended with StepDefinitions is the default step C# class name
 Feature: BDD Driven Google Search
-	In order to find stuff on the web
-	As a google user
+	In order to find good stuff on the web
+	As a search engine user
 	I want to to search for stuff
 
 Scenario: Example - Search with Google

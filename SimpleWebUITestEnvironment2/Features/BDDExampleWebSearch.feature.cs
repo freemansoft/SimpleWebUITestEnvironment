@@ -35,8 +35,8 @@ namespace SimpleWebUITestEnvironment2.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "BDD Driven Google Search", "\tIn order to find stuff on the web\r\n\tAs a google user\r\n\tI want to to search for s" +
-                    "tuff", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "BDD Driven Google Search", "\tIn order to find good stuff on the web\r\n\tAs a search engine user\r\n\tI want to to " +
+                    "search for stuff", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
