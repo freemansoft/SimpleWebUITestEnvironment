@@ -6,6 +6,14 @@ This project will eventually add standard NUnit / Selenium integration tests wri
 
 The solution was built in VS2022 community edition. Rebuld to download dependencies and build the tests
 
+This BDD web test executes using the same tools as any other test suite that uses Selenium.
+```mermaid
+graph LR
+    IDE --> TddFramework(Test Framework NUnit/XUnit) ;
+    TddFramework --> Test -->|selenium| Search(Search Engine);
+
+```
+
 ## Setup
 Install the `SpecFlow Extension` for Visual Studio.  Build the project to restore all the NuGet packages. Run the test in the `Test explorer`.
 
