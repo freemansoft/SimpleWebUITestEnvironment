@@ -15,7 +15,11 @@ graph LR
 ```
 
 ## Setup
-Install the `SpecFlow Extension` for Visual Studio.  Build the project to restore all the NuGet packages. Run the test in the `Test explorer`.
+I've only tested this with Visual Studio on Windows but it should work on other .Net supported platforms with VS Code.
+
+1. Install the `SpecFlow Extension` for Visual Studio prior to loading this solution.  
+1. Build the project to restore all the NuGet packages. 
+1. Run the test in the `Test explorer`.
 
 ## Test Generation and Development
 The Specflow IDE Extension creates and manages a `feature.cs` codebehind file for each `feature` file.  That codebehind file is an NUnit (or XUnit) suite that makes a call to step functions for each `Given` `When` and `Then` statement in the `.feature` feature file.  The developer is respnosible for putting the actual test code in the `step cs` file.
