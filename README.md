@@ -29,6 +29,7 @@ sequenceDiagram
     participant Feature NUnit Codebehind
     participant Step Definition
 
+    Developer ->> Feature File: Create Behavior Scenarios
     Specflow Extension ->> Feature File: Read
     loop For Each Feature in File
         Specflow Extension ->> Feature NUnit Codebehind : Create NUnit test
