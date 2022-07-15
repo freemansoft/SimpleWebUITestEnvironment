@@ -2,7 +2,7 @@
 
 Example C# used as a starting point for TDD / BDD class labs. We write simple Selenium tests that operate against web sites as part of one of the labs.
 
-This project will eventually include standard integration tests written as a straight Nunit and as BDD (Specflow) based tests for the same scenario.
+This project will eventually add standard NUnit / Selenium integration tests written for the same scenarios as BDD (Specflow) based tests for the same scenario.
 
 The solution was built in VS2022 community edition. Rebuld to download dependencies and build the tests
 
