@@ -22,13 +22,12 @@ The Specflow IDE Extension creates and manages a `feature.cs` codebehind file fo
 
 ```mermaid
 sequenceDiagram
-    participant IDE
+    participant Developer
     participant Specflow Extension
     participant NUnit Runner
     participant Feature File
     participant Feature NUnit Codebehind
     participant Step Definition
-    participant Developer
 
     Specflow Extension ->> Feature File: Read
     loop For Each Feature in File
@@ -49,7 +48,6 @@ sequenceDiagram
     participant Feature File
     participant Feature NUnit Codebehind
     participant Step Definition
-    participant Developer
 
     IDE ->> NUnit Runner: Run Tests
     NUnit Runner ->> Feature NUnit Codebehind: Identify Tests
