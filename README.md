@@ -52,4 +52,7 @@ sequenceDiagram
         Feature NUnit Codebehind ->> Step Definition: Invoke Then
     end    
 ```
-
+# References
+* https://specflow.org/ C# BDD testing framework
+* https://www.selenium.dev/ Web UI testing
+* https://specflow.org/bdd/turn-specifications-into-automated-acceptance-tests/
