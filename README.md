@@ -1,4 +1,4 @@
-# TDD / BDD Selenium Sample
+# BDD with SpecFlow and Selenium against public sites
 
 Example C# used as a starting point for TDD / BDD class labs. We write simple Selenium tests that operate against web sites as part of one of the labs.
 
