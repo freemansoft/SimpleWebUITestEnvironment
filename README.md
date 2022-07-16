@@ -6,41 +6,48 @@ We write simple Selenium tests that operate against web sites as part of one of 
 
 The repository was last developed in VS2022 community edition using C# and .Net 6. You should rebuild the solution to download dependencies and build the tests. Run the test with the standard VS Test Explorer.
 
+See the links at the bottom for more information on Behavior Driven Development, Gherkin and Specflow
+
 ## Gherkin Feature Definition
 User Story and work item acceptance criteria that are written in Gherkin syntax can be copied into feature files.  Each line in the Gherkin is turned into a _step_ that is invoked by the unit tests.  The _SpecFlow Extension_ can be used to generate steps with the right syntax. Those steps are stored in step .cs files and are automaticaly called at test execution time.
 
 This Scenario searches the Internet using the Google search engine and verifies that the domain associated with that search term is somewhere in the search results. The example feature is converted into 4 steps that use Selenium to execute their phases.
 
+### Scenario in a feature
 ```gherkin
 Scenario: Example - Search with Google
 	Given I search the internet using site "google"
 	When I use the term "microsoft"
-	Then My search term should be in the title bar
-	And There should be at least 1 links with the "microsoft.com" in them
+	Then There should be at least 1 links with the "microsoft.com" in them
+	And My search term should be in the title bar
 ```
 
-The Scenario above executes in Specflow as 
-```mermaid
-graph TD
-    Test
-    Test(XUnit/Nunit Specflow Generated Test);
-    Test --> GivenStep(Step: Given);
-    Test --> WhenStep(Step: When);
-    Test --> ThenStep(Step: Then);
-    Test --> Then2Step(Step: And Then);
-```
-
+### Related Sceario in a different feature
 This Scenario is virtually the same and uses the exact same test steps.  SpecFlow steps are parameterized so that this scenario can use the exact same steps as the previous one just passing different values for the parameters.
 
 ```gherkin
 Scenario: Example - Search with Google
 	Given I search the internet using site "bing"
 	When I use the term "facebook"
-	Then My search term should be in the title bar
-	And There should be at least 1 links with the "facebook.com" in them
+	Then There should be at least 1 links with the "facebooks.com" in them
+	And My search term should be in the title bar
+```
+See the step .cs file for the details.
+
+### Gherkin and SpecFlow and Automated Tests
+
+The Scenario above can be automated using SpecFlow. It would be broken down and implemented with in the following way
+
+```mermaid
+graph TD
+    Test
+    Test(XUnit/Nunit Specflow Generated Test<br/>in generated test file);
+    Test --> GivenStep(Step: Given<br/>in .cs step file);
+    Test --> WhenStep(Step: When<br/>in .cs step file);
+    Test --> ThenStep(Step: Then<br/>in .cs step file);
+    Test --> Then2Step(Step: And Then<br/>in .cs step file);
 ```
 
-See the step .cs file for the details.
 
 ## Test Execution Path
 
@@ -106,6 +113,8 @@ sequenceDiagram
     end    
 ```
 # References
+* https://www.scaledagileframework.com/behavior-driven-development/ Scaled Agile and Behavior Driven Development
 * https://specflow.org/ C# BDD testing framework
+* https://specflow.org/bdd/turn-specifications-into-automated-acceptance-tests/ 
+* https://www.automatetheplanet.com/handling-parameters-specflow/ advanced SpecFlow parameter handling
 * https://www.selenium.dev/ Web UI testing
-* https://specflow.org/bdd/turn-specifications-into-automated-acceptance-tests/

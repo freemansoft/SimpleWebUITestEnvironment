@@ -108,10 +108,10 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("I use the term \"microsoft\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 13
- testRunner.Then("My search term should be in the title bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("There should be at least 1 links with the \"microsoft.com\" in them", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 14
- testRunner.And("There should be at least 1 links with the \"microsoft.com\" in them", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("My search term should be in the title bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 15
  testRunner.And("The first link takes me to a web site", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -154,10 +154,10 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("I use the term \"microsoft\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 20
- testRunner.Then("My search term should be in the title bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("There should be at least 1 links with the \"microsoft.com\" in them", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 21
- testRunner.And("There should be at least 1 links with the \"microsoft.com\" in them", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("My search term should be in the title bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 22
  testRunner.And("The first link takes me to a web site", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -208,10 +208,10 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When(string.Format("I use the term \"{0}\"", criteria), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 27
- testRunner.Then("My search term should be in the title bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("There should be at least {0} links with the \"{1}\" in them", domainCount, domain), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 28
- testRunner.And(string.Format("There should be at least {0} links with the \"{1}\" in them", domainCount, domain), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("My search term should be in the title bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
