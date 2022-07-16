@@ -79,15 +79,21 @@ namespace SimpleWebUITestEnvironment2.StepDefinitions
             StringAssert.Contains(lastSearch.ToLower(), driver.Title.ToLower());
         }
 
-        [Then(@"There should be at least (.*) links with the search term in thm")]
-        public void ThenThereShouldBeAtLeastLinksWithTheSearchTermInThm(int p0)
-        {
-            string lastSearch = _scenarioContext.Get<string>("lastSearch");
-            IWebDriver driver = _scenarioContext.Get<IWebDriver>("driver");
-            IReadOnlyCollection<IWebElement> links = driver.FindElements(By.PartialLinkText(lastSearch));
-            Assert.LessOrEqual(p0, links.Count);
-        }
 
+        [Then(@"There should be at least (.*) links with the ""([^""]*)"" in them")]
+        public void ThenThereShouldBeAtLeastLinksWithTheInThem(int linkCount, string domainName)
+        {
+            IWebDriver driver = _scenarioContext.Get<IWebDriver>("driver");
+
+            IReadOnlyCollection<IWebElement> links = driver.FindElements(By.TagName("a")).ToList();
+            //foreach (IWebElement e in links)
+            //{
+            //    System.Console.WriteLine(e.GetAttribute("href") + "    " + e.Text);
+            //}
+            // href can be blank in <a> tag.  Who knew?
+            int numInDomain = links.Count(x => (x.GetAttribute("href") + " ").Contains(domainName));
+            Assert.GreaterOrEqual(numInDomain, linkCount, "wrong number of links pointing at " + domainName);
+        }
 
     }
 }

@@ -11,23 +11,24 @@ Scenario: Example - Search with Google
 	Given I want to search with "google"
 	When When I search for "microsoft"
 	Then My search term should be in the title bar
-	And There should be at least 10 links with the search term in thm
+	And There should be at least 1 links with the "microsoft.com" in them
 	And I can click on the first link
 
 Scenario: Example - Search with Bing
 	Given I want to search with "bing"
 	When When I search for "microsoft"
 	Then My search term should be in the title bar
-	And There should be at least 10 links with the search term in thm
+	And There should be at least 1 links with the "microsoft.com" in them
 	And I can click on the first link
 
 Scenario Outline: Example - Search and Title Matches
 	Given I want to search with "<engine>"
 	When When I search for "<criteria>"
 	Then My search term should be in the title bar
+	And There should be at least <domain count> links with the "<domain>" in them
 	Examples: 
-	  | engine | criteria |
-	  | google | amazon   |
-	  | bing   | amazon   |
-	  | google | facebook |
-	  | bing   | facebook |
+	  | engine | criteria | domain       | domain count |
+	  | google | amazon   | amazon.com   | 1            |
+	  | bing   | amazon   | amazon.com   | 1            |
+	  | google | facebook | facebook.com | 1            |
+	  | bing   | facebook | facebook.com | 1            |

@@ -111,7 +111,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Then("My search term should be in the title bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 14
- testRunner.And("There should be at least 10 links with the search term in thm", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("There should be at least 1 links with the \"microsoft.com\" in them", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 15
  testRunner.And("I can click on the first link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -157,7 +157,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Then("My search term should be in the title bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 21
- testRunner.And("There should be at least 10 links with the search term in thm", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("There should be at least 1 links with the \"microsoft.com\" in them", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 22
  testRunner.And("I can click on the first link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -168,16 +168,18 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Example - Search and Title Matches")]
-        [NUnit.Framework.TestCaseAttribute("google", "amazon", null)]
-        [NUnit.Framework.TestCaseAttribute("bing", "amazon", null)]
-        [NUnit.Framework.TestCaseAttribute("google", "facebook", null)]
-        [NUnit.Framework.TestCaseAttribute("bing", "facebook", null)]
-        public virtual void Example_SearchAndTitleMatches(string engine, string criteria, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("google", "amazon", "amazon.com", "1", null)]
+        [NUnit.Framework.TestCaseAttribute("bing", "amazon", "amazon.com", "1", null)]
+        [NUnit.Framework.TestCaseAttribute("google", "facebook", "facebook.com", "1", null)]
+        [NUnit.Framework.TestCaseAttribute("bing", "facebook", "facebook.com", "1", null)]
+        public virtual void Example_SearchAndTitleMatches(string engine, string criteria, string domain, string domainCount, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("engine", engine);
             argumentsOfScenario.Add("criteria", criteria);
+            argumentsOfScenario.Add("domain", domain);
+            argumentsOfScenario.Add("domain count", domainCount);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Example - Search and Title Matches", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 24
 this.ScenarioInitialize(scenarioInfo);
@@ -207,6 +209,9 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
 #line 27
  testRunner.Then("My search term should be in the title bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 28
+ testRunner.And(string.Format("There should be at least {0} links with the \"{1}\" in them", domainCount, domain), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
