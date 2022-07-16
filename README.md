@@ -32,7 +32,24 @@ Scenario: Example - Search with Google
 	Then There should be at least 1 links with the "facebook.com" in them
 	And My search term should be in the title bar
 ```
+
 See the step .cs file for the details.
+
+### Behavior is abstract from implementation
+This Scenario is more about the technical steps and less about behavior. This should be avoided in user stories and test definitions. The details can be hidden inside the steps.
+
+```gherkin
+Scenario: Example - Search with Google
+	Given I want to search for something on the internet 
+    When I open Chrome
+    And I type "www.bing.com" into the url bar and hit enter
+    And I click on the search box
+	And I enter "facebook" into the search field
+    And I click on the search button
+	Then The browser HTTP code should be a 200
+    And  The returned page should have at least 1 href "facebook.com" in them
+	And "facebook" should be in the title bar of the results page
+```
 
 ### Gherkin and SpecFlow and Automated Tests
 
