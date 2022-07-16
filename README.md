@@ -29,7 +29,7 @@ This Scenario is virtually the same and uses the exact same test steps.  SpecFlo
 Scenario: Example - Search with Google
 	Given I search the internet using site "bing"
 	When I use the term "facebook"
-	Then There should be at least 1 links with the "facebooks.com" in them
+	Then There should be at least 1 links with the "facebook.com" in them
 	And My search term should be in the title bar
 ```
 See the step .cs file for the details.
