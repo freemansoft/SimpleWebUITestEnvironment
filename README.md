@@ -53,7 +53,7 @@ Scenario: Example - Search with Google
 
 ### Gherkin and SpecFlow and Automated Tests
 
-The Scenario above can be automated using SpecFlow. It would be broken down and implemented with in the following way
+The Scenario above can be automated using SpecFlow. The Specflow VS extension has BDD test project templates.  The extension automatically genereates `.cs` code behind file for each `.feature` file.  Devlopers can use the context menus to create step files or individual steps that can be pasted into step `.cs` files. The scenarios described above are broken down into a structure similar to.
 
 ```mermaid
 graph TD
