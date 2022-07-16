@@ -120,4 +120,4 @@ sequenceDiagram
 * https://www.selenium.dev/ Web UI testing
 
 # Videos
-[![Yourtube Video Image](http://img.youtube.com/vi/IFtegmYIq68/0.jpg)](http://www.youtube.com/watch?v=IFtegmYIq68 "Explore Behavior Driven Testing using public websites and .Net tools")
+[![Youtube Video Cover Image](http://img.youtube.com/vi/IFtegmYIq68/0.jpg)](http://www.youtube.com/watch?v=IFtegmYIq68 "Explore Behavior Driven Testing using public websites and .Net tools")
