@@ -29,8 +29,8 @@ namespace SimpleWebUITestEnvironment2.StepDefinitions
             driver.Quit();
         }
 
-        [Given(@"I want to search with ""([^""]*)""")]
-        public void GivenIWantToSearchWith(string p0)
+        [Given(@"I search the internet using site ""([^""]*)""")]
+        public void ISearchTheInternetUsingSite(string p0)
         {
             IWebDriver driver = _scenarioContext.Get<IWebDriver>("driver");
             Assert.NotNull(driver);
@@ -41,8 +41,8 @@ namespace SimpleWebUITestEnvironment2.StepDefinitions
         /// Saves the last search term to be used in "Then" statements
         /// </summary>
         /// <param name="p0"></param>
-        [When(@"When I search for ""([^""]*)""")]
-        public void WhenWhenISearchFor(string p0)
+        [When(@"I use the term ""([^""]*)""")]
+        public void IUseTheTheTerm(string p0)
         {
             _scenarioContext.Set<string>(p0, "lastSearch");
             IWebDriver driver = _scenarioContext.Get<IWebDriver>("driver");
@@ -59,7 +59,7 @@ namespace SimpleWebUITestEnvironment2.StepDefinitions
         /// Assumes "search term " refers to last search term
         /// </summary>
         [Then(@"My search term should be in the title bar")]
-        public void ThenMySearchTermShouldBeInTheTitleBar()
+        public void MySearchTermShouldBeInTheTitleBar()
         {
             string lastSearch = _scenarioContext.Get<string>("lastSearch");
             IWebDriver driver = _scenarioContext.Get<IWebDriver>("driver");
@@ -68,8 +68,8 @@ namespace SimpleWebUITestEnvironment2.StepDefinitions
 
         }
 
-        [Then(@"I can click on the first link")]
-        public void ThenICanClickOnTheFirstLink()
+        [Then(@"The first link takes me to a web site")]
+        public void TheFirstLinkTakesMeToAWebSite()
         {
             string lastSearch = _scenarioContext.Get<string>("lastSearch");
             IWebDriver driver = _scenarioContext.Get<IWebDriver>("driver");
@@ -81,7 +81,7 @@ namespace SimpleWebUITestEnvironment2.StepDefinitions
 
 
         [Then(@"There should be at least (.*) links with the ""([^""]*)"" in them")]
-        public void ThenThereShouldBeAtLeastLinksWithTheInThem(int linkCount, string domainName)
+        public void ThereShouldBeAtLeastLinksWithTheInThem(int linkCount, string domainName)
         {
             IWebDriver driver = _scenarioContext.Get<IWebDriver>("driver");
 

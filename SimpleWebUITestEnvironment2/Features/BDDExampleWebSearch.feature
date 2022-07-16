@@ -8,22 +8,22 @@ Feature: BDD Driven Google Search
 	I want to to search for stuff
 
 Scenario: Example - Search with Google
-	Given I want to search with "google"
-	When When I search for "microsoft"
+	Given I search the internet using site "google"
+	When I use the term "microsoft"
 	Then My search term should be in the title bar
 	And There should be at least 1 links with the "microsoft.com" in them
-	And I can click on the first link
+	And The first link takes me to a web site
 
 Scenario: Example - Search with Bing
-	Given I want to search with "bing"
-	When When I search for "microsoft"
+	Given I search the internet using site "bing"
+	When I use the term "microsoft"
 	Then My search term should be in the title bar
 	And There should be at least 1 links with the "microsoft.com" in them
-	And I can click on the first link
+	And The first link takes me to a web site
 
 Scenario Outline: Example - Search and Title Matches
-	Given I want to search with "<engine>"
-	When When I search for "<criteria>"
+	Given I search the internet using site "<engine>"
+	When I use the term "<criteria>"
 	Then My search term should be in the title bar
 	And There should be at least <domain count> links with the "<domain>" in them
 	Examples: 
