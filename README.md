@@ -118,3 +118,6 @@ sequenceDiagram
 * https://specflow.org/bdd/turn-specifications-into-automated-acceptance-tests/ 
 * https://www.automatetheplanet.com/handling-parameters-specflow/ advanced SpecFlow parameter handling
 * https://www.selenium.dev/ Web UI testing
+
+# Videos
+[![Yourtube Video Image](http://img.youtube.com/vi/IFtegmYIq68/0.jpg)](http://www.youtube.com/watch?v=IFtegmYIq68 "Explore Behavior Driven Testing using public websites and .Net tools")
