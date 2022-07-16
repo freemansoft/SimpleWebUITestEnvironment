@@ -40,7 +40,7 @@ This Scenario is more about the technical steps and less about behavior. This sh
 
 ```gherkin
 Scenario: Example - Search with Google
-	Given I want to search for something on the internet 
+    Given I want to search for something on the internet 
     When I open Chrome
     And I type "www.bing.com" into the url bar and hit enter
     And I click on the search box
