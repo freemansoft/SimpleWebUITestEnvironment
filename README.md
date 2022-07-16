@@ -1,18 +1,60 @@
 # BDD with SpecFlow and Selenium against public sites
 
-Example C# used as a starting point for TDD / BDD class labs. We write simple Selenium tests that operate against web sites as part of one of the labs.
+Example C# used as a starting point for TDD / BDD class labs.
 
-This project will eventually add standard NUnit / Selenium integration tests written for the same scenarios as BDD (Specflow) based tests for the same scenario.
+We write simple Selenium tests that operate against web sites as part of one of the labs. This project will eventually add standard non-BDD NUnit / Selenium integration tests. They will mimic the Behavior Driven Development (Specflow) based tests for the same scenario.
 
-The solution was built in VS2022 community edition. Rebuld to download dependencies and build the tests
+The repository was last developed in VS2022 community edition using C# and .Net 6. You should rebuild the solution to download dependencies and build the tests. Run the test with the standard VS Test Explorer.
 
-This BDD web test executes using the same tools as any other test suite that uses Selenium.
+## Gherkin Feature Definition
+User Story and work item acceptance criteria that are written in Gherkin syntax can be copied into feature files.  Each line in the Gherkin is turned into a _step_ that is invoked by the unit tests.  The _SpecFlow Extension_ can be used to generate steps with the right syntax. Those steps are stored in step .cs files and are automaticaly called at test execution time.
+
+This Scenario searches the Internet using the Google search engine and verifies that the domain associated with that search term is somewhere in the search results. The example feature is converted into 4 steps that use Selenium to execute their phases.
+
+```gherkin
+Scenario: Example - Search with Google
+	Given I search the internet using site "google"
+	When I use the term "microsoft"
+	Then My search term should be in the title bar
+	And There should be at least 1 links with the "microsoft.com" in them
+```
+
+The Scenario above executes in Specflow as 
 ```mermaid
-graph LR
-    IDE --> TddFramework(Test Framework NUnit/XUnit) ;
-    TddFramework --> Test -->|selenium| Search(Search Engine);
+graph TD
+    Test
+    Test(XUnit/Nunit Specflow Generated Test);
+    Test --> GivenStep(Step: Given);
+    Test --> WhenStep(Step: When);
+    Test --> ThenStep(Step: Then);
+    Test --> Then2Step(Step: And Then);
+```
+
+This Scenario is virtually the same and uses the exact same test steps.  SpecFlow steps are parameterized so that this scenario can use the exact same steps as the previous one just passing different values for the parameters.
+
+```gherkin
+Scenario: Example - Search with Google
+	Given I search the internet using site "bing"
+	When I use the term "facebook"
+	Then My search term should be in the title bar
+	And There should be at least 1 links with the "facebook.com" in them
+```
+
+See the step .cs file for the details.
+
+## Test Execution Path
+
+This BDD web test executes using the same tools as any other test suite.  The test runner finds the NUnit defined tests in the test suite and runs them.  Individual tests use Selenium to call the remote web site and evaluate the model.
+
+```mermaid
+graph TD
+    IDE --> TestFramework(Test Framework NUnit/XUnit) --> Test -->|selenium| Search(Search Engine);
+    Search -.->|Web Response| Test ;
+    Test -.->|Test Results| TestFramework;
+    TestFramework -.->|Suite Results| IDE;
 
 ```
+
 
 ## Setup
 I've only tested this with Visual Studio on Windows but it should work on other .Net supported platforms with VS Code.
