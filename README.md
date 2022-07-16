@@ -11,7 +11,7 @@ See the links at the bottom for more information on Behavior Driven Development,
 ## Gherkin Feature Definition
 User Story and work item acceptance criteria that are written in Gherkin syntax can be copied into feature files.  Each line in the Gherkin is turned into a _step_ that is invoked by the unit tests.  The _SpecFlow Extension_ can be used to generate steps with the right syntax. Those steps are stored in step .cs files and are automaticaly called at test execution time.
 
-This Scenario searches the Internet using the Google search engine and verifies that the domain associated with that search term is somewhere in the search results. The example feature is converted into 4 steps that use Selenium to execute their phases.
+This Scenario searches the Internet using the Google search engine and verifies that the domain associated with that search term is somewhere in the search results. The example feature is converted into 4 steps. Some of the steps invokeSelenium to make remote requests or interrogate the responses.
 
 ### Scenario in a feature
 ```gherkin
