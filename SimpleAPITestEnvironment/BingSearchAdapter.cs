@@ -4,7 +4,7 @@ using System.Net;
 
 namespace SimpleAPITestEnvironment
 {
-    public class BingAdapter : ISearchAdapter
+    public class BingSearchAdapter : ISearchAdapter
     {
         private string endpoint;
         private string subscriptionKey;
@@ -13,7 +13,7 @@ namespace SimpleAPITestEnvironment
         private string responseJson;
         private JObject responseJObject;
 
-        public BingAdapter(string endpoint, string subscriptionKey)
+        public BingSearchAdapter(string endpoint, string subscriptionKey)
         {
             this.endpoint = endpoint;
             this.subscriptionKey = subscriptionKey;

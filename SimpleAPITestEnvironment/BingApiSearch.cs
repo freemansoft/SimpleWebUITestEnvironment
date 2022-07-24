@@ -29,7 +29,7 @@ namespace SimpleAPITestEnvironment
             Console.OutputEncoding = Encoding.UTF8;
             Console.WriteLine("Searching the Web for: " + query);
 
-            ISearchAdapter adapter = new BingAdapter(endpoint, subscriptionKey);
+            ISearchAdapter adapter = new BingSearchAdapter(endpoint, subscriptionKey);
             HttpWebResponse response = adapter.RunSearch(query, false);
             // Create a dictionary to store relevant headers and have the utility log them
             Dictionary<String, String> relevantHeaders = adapter.GetVendorHeaders(true);
