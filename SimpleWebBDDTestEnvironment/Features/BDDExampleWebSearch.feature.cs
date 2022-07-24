@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace SimpleWebUITestEnvironment2.Features
+namespace SimpleWebBDDTestEnvironment.Features
 {
     using TechTalk.SpecFlow;
     using System;
