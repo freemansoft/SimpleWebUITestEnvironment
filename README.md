@@ -87,6 +87,28 @@ I've only tested this with Visual Studio on Windows but it should work on other 
 1. Build the project to restore all the NuGet packages. 
 1. Run the test in the `Test explorer`.
 
+### Search API KEYS - when directly searching APIs
+The API direct tests require a bing API key in order to access the API.  Acquire that from the Azure portal and then put that value in a .runsettings file at the top of the solution.
+1. Enable autodetection of a .runsettings file in _Tools->Options->Test->General_
+1. Create .runsetting file in the root of this project
+1. Put the following XML in that file putting your Bing subscription key in the correct place
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<!-- File name extension must be .runsettings -->
+<RunSettings>
+  <RunConfiguration>
+    <EnvironmentVariables>
+      <!-- List of environment variables we want to set-->
+      <BING_SEARCH_V7_SUBSCRIPTION_KEY>PUT_BING_SEARCH_KEY_FROM_AZURE_PORTAL_HERE</BING_SEARCH_V7_SUBSCRIPTION_KEY>
+      <BING_SEARCH_V7_ENDPOINT>https://api.bing.microsoft.com/</BING_SEARCH_V7_ENDPOINT>
+    </EnvironmentVariables>
+  </RunConfiguration>
+</RunSettings>
+```
+
+
+
 ## Test Generation and Development
 The Specflow IDE Extension creates and manages a `feature.cs` codebehind file for each `feature` file.  That codebehind file is an NUnit (or XUnit) suite that makes a call to step functions for each `Given` `When` and `Then` statement in the `.feature` feature file.  The developer is respnosible for putting the actual test code in the `step cs` file.
 

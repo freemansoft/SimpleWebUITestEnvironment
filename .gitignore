@@ -7,6 +7,9 @@
 *.userosscache
 *.sln.docstates
 
+# Environment section includes secret keys we don't want to end up on GitHub
+.runsettings
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
