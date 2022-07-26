@@ -98,11 +98,15 @@ graph LR
 
 
 ## Setup
+### Visual Studio
 I've only tested this with Visual Studio on Windows but it should work on other .Net supported platforms with VS Code.
 
 1. Install the `SpecFlow Extension` for Visual Studio prior to loading this solution.  
 1. Build the project to restore all the NuGet packages. 
 1. Run the test in the `Test explorer`.
+
+### VS Code
+See https://docs.specflow.org/projects/specflow/en/latest/vscode/vscode-specflow.html
 
 ### Setup for searching web search engines.
 No configuration required
