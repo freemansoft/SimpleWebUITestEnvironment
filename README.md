@@ -1,8 +1,12 @@
 # BDD with SpecFlow and Selenium against public sites
 
-Example C# used as a starting point for TDD / BDD class labs.
+Example C# used as a starting point for a TDD / BDD lab.
 
-We write simple Selenium tests that operate against web sites as part of one of the labs. This project will eventually add standard non-BDD NUnit / Selenium integration tests. They will mimic the Behavior Driven Development (Specflow) based tests for the same scenario.
+1. UI BDD tests using Selenium tests that operate against search web sites. 
+1. Web API BDD tests that operate against search APIs.
+1. An NUnit API test that operates against search APIs. This is used to shake out the API search engine adapter classes.
+
+This project will eventually add standard non-BDD NUnit / Selenium integration tests.
 
 The repository was last developed in VS2022 community edition using C# and .Net 6. You should rebuild the solution to download dependencies and build the tests. Run the test with the standard VS Test Explorer.
 
@@ -66,16 +70,29 @@ graph TD
 ```
 
 
-## Test Execution Path
+## BDD Test Execution Path 
 
-This BDD web test executes using the same tools as any other test suite.  The test runner finds the NUnit defined tests in the test suite and runs them.  Individual tests use Selenium to call the remote web site and evaluate the model.
+### Web Sites
+BDD web test execute using Specflow as a driver for NUnit tests.  The test runner finds the NUnit defined tests in the test suite and runs them.  Individual steps use Selenium to call the remote web site and evaluate the model.
 
 ```mermaid
-graph TD
+graph LR
     IDE --> TestFramework(Test Framework NUnit/XUnit) --> Test -->|selenium| Search(Search Engine);
     Search -.->|Web Response| Test ;
     Test -.->|Test Results| TestFramework;
     TestFramework -.->|Suite Results| IDE;
+
+```
+
+### APIs
+BDD api test execute using Specflow as a driver for NUnit tests. The test runner finds the NUnit defined tests in the test suite and runs them. Individual steps use a web API library to make calls and extract resuts
+
+```mermaid
+graph LR
+    IDE --> TestFramework(Test Framework NUnit/XUnit) --> Test -->|test utils| Search(Search API);
+    Search -.->|API Response| Test ;
+    Test -.->|Test Results| TestFramework;
+    TestFramework -.->|API Results| IDE;
 
 ```
 
@@ -87,9 +104,14 @@ I've only tested this with Visual Studio on Windows but it should work on other 
 1. Build the project to restore all the NuGet packages. 
 1. Run the test in the `Test explorer`.
 
-### Search API KEYS - when directly searching APIs
-The API direct tests require a bing API key in order to access the API.  Acquire that from the Azure portal and then put that value in a .runsettings file at the top of the solution.
-1. Enable autodetection of a .runsettings file in _Tools->Options->Test->General_
+### Setup for searching web search engines.
+No configuration required
+
+### Setup for searching APIs - when directly searching APIs
+The `SimpleAPI..TestEnvironment` searches against search engine APIs instead of against the web pages.  To get this to work you have to register with Bing or Google to get search keys. (Bing only at the tieme of this writing)
+
+The API direct tests require a bing API key in order to access the API.  Acquire that from the Azure portal and then put that value in a .runsettings file at the top of the solution. You can run the test project once you have completed the following steps.
+1. Enable autodetection of a `.runsettings` file in Visual Studio `Tools->Options->Test->General` This will enable .runsettings for all test projects
 1. Create .runsetting file in the root of this project
 1. Put the following XML in that file putting your Bing subscription key in the correct place
 
@@ -110,7 +132,7 @@ The API direct tests require a bing API key in order to access the API.  Acquire
 
 
 ## Test Generation and Development
-The Specflow IDE Extension creates and manages a `feature.cs` codebehind file for each `feature` file.  That codebehind file is an NUnit (or XUnit) suite that makes a call to step functions for each `Given` `When` and `Then` statement in the `.feature` feature file.  The developer is respnosible for putting the actual test code in the `step cs` file.
+The Specflow IDE Extension creates and manages a `.feature.cs` codebehind file for each `.feature` file.  That codebehind file contains an NUnit (or XUnit) suite with one test for each scenario. Each codebehind test/scenario makes a call to step functions for each `Given` `When` and `Then` statement in the `.feature` feature file.  The developer is respnosible for putting the actual test code in the `step cs` file.
 
 ```mermaid
 sequenceDiagram

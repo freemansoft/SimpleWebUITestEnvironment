@@ -1,3 +1,6 @@
+///
+/// Verifies the bing search library with a hard coded unit test..
+///
 namespace SimpleAPITestEnvironment
 {
     using Newtonsoft.Json.Linq;
@@ -8,9 +11,9 @@ namespace SimpleAPITestEnvironment
     using System.Collections.Generic;
     using System.Net;
     using System.Text;
-    public class BingApiSearch
+    public class BingApiSearchTest
     {
-        // Add your Bing Search V7 subscription key and endpoint to your environment variables
+        // Add your Bing Search V7 subscription key and endpoint to your environment variables - .runsettings if running in visual studio
         static string subscriptionKey = Environment.GetEnvironmentVariable("BING_SEARCH_V7_SUBSCRIPTION_KEY");
         static string endpoint = Environment.GetEnvironmentVariable("BING_SEARCH_V7_ENDPOINT") + "/v7.0/search";
 
@@ -23,6 +26,9 @@ namespace SimpleAPITestEnvironment
         {
         }
 
+        /// <summary>
+        /// Hard coded test that runs against facebook using the bing library
+        /// </summary>
         [Test]
         public void SearchBingForFacebook()
         {
