@@ -112,9 +112,14 @@ See https://docs.specflow.org/projects/specflow/en/latest/vscode/vscode-specflow
 No configuration required
 
 ### Setup for searching APIs - when directly searching APIs
-The `SimpleAPI..TestEnvironment` searches against search engine APIs instead of against the web pages.  To get this to work you have to register with Bing or Google to get search keys. (Bing only at the tieme of this writing)
+The `SimpleAPI..TestEnvironment` test projects run against search engine APIs instead of against the web pages.  To get this to work you have to register with Bing or Google to get search keys. (Bing only at the tieme of this writing)
+1. Navigate to https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Bing%2Faccounts
+1. Create a "Bing Search"
+1. Find the search URL and keys generated
 
-The API direct tests require a bing API key in order to access the API.  Acquire that from the Azure portal and then put that value in a .runsettings file at the top of the solution. You can run the test project once you have completed the following steps.
+The API direct tests require a Bing API key in order to access the API.  Acquire that from the Azure portal and then put that value in a .runsettings file at the top of the solution. 
+
+You can run the test project once you have completed the following steps.
 1. Enable autodetection of a `.runsettings` file in Visual Studio `Tools->Options->Test->General` This will enable .runsettings for all test projects
 1. Create .runsetting file in the root of this project
 1. Put the following XML in that file putting your Bing subscription key in the correct place
