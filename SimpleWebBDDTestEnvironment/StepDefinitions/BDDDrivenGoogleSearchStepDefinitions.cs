@@ -80,7 +80,7 @@ namespace SimpleWebUITestEnvironment2.StepDefinitions
         }
 
 
-        [Then(@"There should be at least (.*) links with the ""([^""]*)"" in them")]
+        [Then(@"There should be at least (.*) links with the trademark holder site ""([^""]*)"" in them")]
         public void ThereShouldBeAtLeastLinksWithTheInThem(int linkCount, string domainName)
         {
             IWebDriver driver = _scenarioContext.Get<IWebDriver>("driver");

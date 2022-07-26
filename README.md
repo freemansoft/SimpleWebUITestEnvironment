@@ -22,7 +22,7 @@ This Scenario searches the Internet using the Google search engine and verifies 
 Scenario: Example - Search with Google
 	Given I search the internet using site "google"
 	When I use the term "microsoft"
-	Then There should be at least 1 links with the "microsoft.com" in them
+	Then There should be at least 1 links with the trademark holder site "microsoft.com" in them
 	And My search term should be in the title bar
 ```
 
@@ -33,7 +33,7 @@ This Scenario is virtually the same and uses the exact same test steps.  SpecFlo
 Scenario: Example - Search with Google
 	Given I search the internet using site "bing"
 	When I use the term "facebook"
-	Then There should be at least 1 links with the "facebook.com" in them
+	Then There should be at least 1 links with the trademark holder site "facebook.com" in them
 	And My search term should be in the title bar
 ```
 

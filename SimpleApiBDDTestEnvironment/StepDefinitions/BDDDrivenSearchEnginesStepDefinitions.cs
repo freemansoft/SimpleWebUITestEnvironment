@@ -37,7 +37,7 @@ namespace SimpleApiBDDTestEnvironment.StepDefinitions
             Assert.NotNull(response);
         }
 
-        [Then(@"There should be at least (.*) links with the ""([^""]*)"" in them")]
+        [Then(@"There should be at least (.*) links with the trademark holder site ""([^""]*)"" in them")]
         public void ThenThereShouldBeAtLeastLinksWithTheInThem(int numLinks, string linkSubstring)
         {
             ISearchAdapter adapter = _scenarioContext.Get<ISearchAdapter>();

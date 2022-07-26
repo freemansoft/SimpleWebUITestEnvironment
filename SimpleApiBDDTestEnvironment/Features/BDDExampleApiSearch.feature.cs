@@ -35,8 +35,8 @@ namespace SimpleApiBDDTestEnvironment.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "BDD Driven Search Engines", "\tIn order to find good stuff on the web\r\n\tAs a search engine user\r\n\tI want to to " +
-                    "search for stuff", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "BDD Driven Search Engines", "\tIn order to protect tradmark holders\r\n\tAs a search that includes a trademark\r\n\tI" +
+                    " want the results to include the tradmark holder site", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -108,7 +108,8 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("I use the term \"microsoft\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 19
- testRunner.Then("There should be at least 1 links with the \"microsoft.com\" in them", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("There should be at least 1 links with the trademark holder site \"microsoft.com\" i" +
+                        "n them", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -154,7 +155,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When(string.Format("I use the term \"{0}\"", criteria), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 25
- testRunner.Then(string.Format("There should be at least {0} links with the \"{1}\" in them", domainCount, domain), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("There should be at least {0} links with the trademark holder site \"{1}\" in them", domainCount, domain), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
