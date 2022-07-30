@@ -26,11 +26,11 @@ Scenario: Example - Search with Google
 	And My search term should be in the title bar
 ```
 
-### Related Sceario in a different feature
+### Another Feature using the same steps
 This Scenario is virtually the same and uses the exact same test steps.  SpecFlow steps are parameterized so that this scenario can use the exact same steps as the previous one just passing different values for the parameters.
 
 ```gherkin
-Scenario: Example - Search with Google
+Scenario: Example - Search with Bing
 	Given I search the internet using site "bing"
 	When I use the term "facebook"
 	Then There should be at least 1 links with the trademark holder site "facebook.com" in them
@@ -39,7 +39,7 @@ Scenario: Example - Search with Google
 
 See the step .cs file for the details.
 
-### Behavior is abstract from implementation
+### Behavior should be isolated from implementation
 This Scenario is more about the technical steps and less about behavior. This should be avoided in user stories and test definitions. The details can be hidden inside the steps.
 
 ```gherkin
@@ -186,10 +186,19 @@ sequenceDiagram
 ```
 # References
 * https://www.scaledagileframework.com/behavior-driven-development/ Scaled Agile and Behavior Driven Development
+
+BDD with SpecFlow
 * https://specflow.org/ C# BDD testing framework
 * https://specflow.org/bdd/turn-specifications-into-automated-acceptance-tests/ 
 * https://www.automatetheplanet.com/handling-parameters-specflow/ advanced SpecFlow parameter handling
+
+Web Testing
 * https://www.selenium.dev/ Web UI testing
+
+Search Engine APIs
+* https://docs.microsoft.com/en-us/bing/search-apis/bing-web-search/create-bing-search-service-resource
+* https://docs.microsoft.com/en-us/bing/search-apis/bing-web-search/quickstarts/rest/csharp
+* https://docs.microsoft.com/en-us/bing/search-apis/bing-web-search/search-responses
 
 # Videos
 [![Youtube Video Cover Image](http://img.youtube.com/vi/IFtegmYIq68/0.jpg)](http://www.youtube.com/watch?v=IFtegmYIq68 "Explore Behavior Driven Testing using public websites and .Net tools")

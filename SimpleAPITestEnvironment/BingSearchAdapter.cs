@@ -9,7 +9,9 @@ namespace SimpleAPITestEnvironment
         private string endpoint;
         private string subscriptionKey;
 
-        private HttpWebResponse response;
+
+        private HttpResponseMessage responseMessage;
+
         private string responseJson;
         private JObject responseJObject;
 
@@ -17,45 +19,54 @@ namespace SimpleAPITestEnvironment
         {
             this.endpoint = endpoint;
             this.subscriptionKey = subscriptionKey;
+            this.responseJson = "";
+            this.responseJObject = new JObject();
+            this.responseMessage = null!;
         }
 
-        public HttpWebResponse RunSearch(String query, bool logResponse)
+        public HttpResponseMessage RunSearch(String query, bool logResponse)
         {
             // Construct the URI of the search request
             var uriQuery = endpoint + "?q=" + Uri.EscapeDataString(query) + "&mkt=" + "en-US" + "&responseFilter=" + Uri.EscapeDataString("webpages");
 
             // Perform the Web request and get the response
-            WebRequest request = HttpWebRequest.Create(uriQuery);
-            request.Headers["Ocp-Apim-Subscription-Key"] = subscriptionKey;
-            response = (HttpWebResponse)request.GetResponseAsync().Result;
+            HttpClient ourClient = new HttpClient();
 
-            responseJson = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            if (logResponse)
+            var request = new HttpRequestMessage
             {
-                Console.WriteLine("JSON Response:");
-                dynamic parsedJson = JsonConvert.DeserializeObject(responseJson);
-                Console.WriteLine(JsonConvert.SerializeObject(parsedJson, Formatting.Indented));
-            }
+                RequestUri = new Uri(uriQuery),
+                Method = HttpMethod.Get
+            };
+            request.Headers.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
+            responseMessage = ourClient.Send(request);
+            responseMessage.EnsureSuccessStatusCode();
+
+            var readAsStringAsync = responseMessage.Content.ReadAsStringAsync();
+            responseJson = readAsStringAsync.Result;
 
             responseJObject = JObject.Parse(responseJson);
+            if (logResponse)
+            {
+                Console.WriteLine(JsonConvert.SerializeObject(responseJObject, Formatting.Indented));
+            }
+            return responseMessage;
 
-            return response;
         }
 
-        public Dictionary<String, String> GetVendorHeaders(bool logThem)
+        public Dictionary<String, IEnumerable<string>> GetVendorHeaders(bool logThem)
         {
-            if (response == null)
+            if (responseMessage == null)
             {
                 throw new NullReferenceException();
             }
 
-            Dictionary<String, String> relevantHeaders = new Dictionary<String, String>();
+            Dictionary<string, IEnumerable<string>> relevantHeaders = new Dictionary<string, IEnumerable<string>>();
 
             // Extract Bing HTTP headers
-            foreach (String header in response.Headers)
+            foreach (KeyValuePair<string, IEnumerable<string>> header in responseMessage.Headers)
             {
-                if (header.StartsWith("BingAPIs-") || header.StartsWith("X-MSEdge-"))
-                    relevantHeaders[header] = response.Headers[header];
+                if (header.Key.StartsWith("BingAPIs-") || header.Key.StartsWith("X-MSEdge-"))
+                    relevantHeaders.Add(header.Key, header.Value);
             }
 
             // Show headers
@@ -72,12 +83,11 @@ namespace SimpleAPITestEnvironment
 
         public IEnumerable<JToken> UrlsContaining(string queryDomainExpected, bool logWebPages)
         {
-            if (response == null)
+            if (responseMessage == null)
             {
                 throw new NullReferenceException();
             }
 
-            responseJObject = JObject.Parse(responseJson);
             JToken webPagesValues = responseJObject["webPages"]["value"];
             if (logWebPages)
             {

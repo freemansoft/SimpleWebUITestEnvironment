@@ -1,7 +1,6 @@
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using SimpleAPITestEnvironment;
-using System.Net;
 
 
 namespace SimpleApiBDDTestEnvironment.StepDefinitions
@@ -10,8 +9,8 @@ namespace SimpleApiBDDTestEnvironment.StepDefinitions
     public class BDDDrivenSearchEnginesStepDefinitions
     {
         // Add your Bing Search V7 subscription key and endpoint to your environment variables - .runsettings if running in visual studio
-        static string subscriptionKey = Environment.GetEnvironmentVariable("BING_SEARCH_V7_SUBSCRIPTION_KEY");
-        static string endpoint = Environment.GetEnvironmentVariable("BING_SEARCH_V7_ENDPOINT") + "/v7.0/search";
+        static string subscriptionKey = Environment.GetEnvironmentVariable("BING_SEARCH_V7_SUBSCRIPTION_KEY") ?? "";
+        static string endpoint = (Environment.GetEnvironmentVariable("BING_SEARCH_V7_ENDPOINT") ?? "") + "/v7.0/search";
 
         private ScenarioContext _scenarioContext;
 
@@ -33,7 +32,7 @@ namespace SimpleApiBDDTestEnvironment.StepDefinitions
         {
             ISearchAdapter adapter = _scenarioContext.Get<ISearchAdapter>();
 
-            HttpWebResponse response = adapter.RunSearch(searchTerm, false);
+            HttpResponseMessage response = adapter.RunSearch(searchTerm, false);
             Assert.NotNull(response);
         }
 
