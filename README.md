@@ -77,7 +77,7 @@ BDD web test execute using Specflow as a driver for NUnit tests.  The test runne
 
 ```mermaid
 graph LR
-    IDE --> TestFramework[Test Framework NUnit/XUnit] --> Test --> Steps -->|selenium| SearchWeb(Search Engine) --> SearchApi(Search API);
+    IDE --> TestFramework[Test Framework<br/>NUnit/XUnit] --> Test[Test Feature<br/>SpecFlow Generated] --> Steps -->|selenium| SearchWeb(Search Engine) --> SearchApi(Search API);
     SearchWeb -.->|Web Response| Steps ;
     Steps -.-> Test;
     Test -.->|Test Results| TestFramework;
@@ -90,7 +90,7 @@ BDD api test execute using Specflow as a driver for NUnit tests. The test runner
 
 ```mermaid
 graph LR
-    IDE --> TestFramework[Test Framework NUnit/XUnit] --> Test --> Steps -->|test utils| SearchApi(Search API);
+    IDE --> TestFramework[Test Framework<br/>NUnit/XUnit] --> Test[TestFeature<br/>SPecflow Generated] --> Steps -->|test utils| SearchApi(Search API);
     SearchApi -.->|API Response| Steps ;
     Steps -.-> Test
     Test -.->|Test Results| TestFramework;
