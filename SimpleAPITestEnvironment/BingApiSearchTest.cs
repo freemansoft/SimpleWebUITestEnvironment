@@ -3,8 +3,8 @@
 ///
 namespace SimpleAPITestEnvironment
 {
+    using FluentAssertions;
     using Newtonsoft.Json.Linq;
-
     /// https://docs.microsoft.com/en-us/bing/search-apis/bing-web-search/quickstarts/rest/csharp
 
     using System;
@@ -46,7 +46,7 @@ namespace SimpleAPITestEnvironment
             {
                 Console.WriteLine(url);
             }
-            Assert.Greater(urls.Count(), 0);
+            urls.Count().Should().BeGreaterThan(0);
         }
 
 

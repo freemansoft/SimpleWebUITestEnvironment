@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
@@ -33,7 +32,7 @@ namespace SimpleWebUITestEnvironment2.StepDefinitions
         public void ISearchTheInternetUsingSite(string p0)
         {
             IWebDriver driver = _scenarioContext.Get<IWebDriver>("driver");
-            Assert.NotNull(driver);
+            driver.Should().NotBeNull();
             driver.Navigate().GoToUrl("https://www." + p0 + ".com");
         }
 
@@ -52,7 +51,7 @@ namespace SimpleWebUITestEnvironment2.StepDefinitions
             queryField.SendKeys(p0);
             queryField.Submit();
             // wait until we get some link with p0 in it
-            Assert.IsNotNull(wait.Until(d => d.FindElement(By.PartialLinkText(p0))));
+            wait.Until(d => d.FindElement(By.PartialLinkText(p0))).Should().NotBeNull();
         }
 
         /// <summary>
@@ -64,7 +63,7 @@ namespace SimpleWebUITestEnvironment2.StepDefinitions
             string lastSearch = _scenarioContext.Get<string>("lastSearch");
             IWebDriver driver = _scenarioContext.Get<IWebDriver>("driver");
             string title = driver.Title;
-            StringAssert.Contains(lastSearch, title, "dang it");
+            title.Should().Contain(lastSearch);
 
         }
 
@@ -76,12 +75,12 @@ namespace SimpleWebUITestEnvironment2.StepDefinitions
             IWebElement link = driver.FindElement(By.PartialLinkText(lastSearch));
             link.Click();
             // check against the title of the home page of the site we went to
-            StringAssert.Contains(lastSearch.ToLower(), driver.Title.ToLower());
+            driver.Title.ToLower().Should().Contain(lastSearch.ToLower());
         }
 
 
         [Then(@"There should be at least (.*) links with the trademark holder site ""([^""]*)"" in them")]
-        public void ThereShouldBeAtLeastLinksWithTheInThem(int linkCount, string domainName)
+        public void ThereShouldBeAtLeastLinksWithTheInThem(int linkCountMinimum, string domainName)
         {
             IWebDriver driver = _scenarioContext.Get<IWebDriver>("driver");
 
@@ -92,7 +91,7 @@ namespace SimpleWebUITestEnvironment2.StepDefinitions
             //}
             // href can be blank in <a> tag.  Who knew?
             int numInDomain = links.Count(x => (x.GetAttribute("href") + " ").Contains(domainName));
-            Assert.GreaterOrEqual(numInDomain, linkCount, "wrong number of links pointing at " + domainName);
+            numInDomain.Should().BeGreaterThanOrEqualTo(linkCountMinimum);
         }
 
     }

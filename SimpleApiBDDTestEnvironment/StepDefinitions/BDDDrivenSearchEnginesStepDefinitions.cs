@@ -1,5 +1,4 @@
 using Newtonsoft.Json.Linq;
-using NUnit.Framework;
 using SimpleAPITestEnvironment;
 
 
@@ -23,7 +22,7 @@ namespace SimpleApiBDDTestEnvironment.StepDefinitions
         public void GivenISearchTheInternetUsingSite(string site)
         {
             //We don't have a Google test class yet
-            Assert.That(site, Is.EqualTo("bing"));
+            site.Should().Be("bing");
             _scenarioContext.Set<ISearchAdapter>(new BingSearchAdapter(endpoint, subscriptionKey));
         }
 
@@ -33,7 +32,7 @@ namespace SimpleApiBDDTestEnvironment.StepDefinitions
             ISearchAdapter adapter = _scenarioContext.Get<ISearchAdapter>();
 
             HttpResponseMessage response = adapter.RunSearch(searchTerm, false);
-            Assert.NotNull(response);
+            response.Should().NotBeNull();
         }
 
         [Then(@"There should be at least (.*) links with the trademark holder site ""([^""]*)"" in them")]
@@ -41,7 +40,7 @@ namespace SimpleApiBDDTestEnvironment.StepDefinitions
         {
             ISearchAdapter adapter = _scenarioContext.Get<ISearchAdapter>();
             IEnumerable<JToken> urls = adapter.UrlsContaining(linkSubstring, true);
-            Assert.GreaterOrEqual(urls.Count(), numLinks);
+            urls.Count().Should().BeGreaterThanOrEqualTo(numLinks);
         }
 
 
