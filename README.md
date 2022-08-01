@@ -98,6 +98,48 @@ graph LR
 
 ```
 
+## Specflow _steps_ can be reused
+Features are composed of some mix of `Given`. `When`, `Then` steps.  The steps are implemented as standalone C# functions.  _Note that the Java based Cucumber works the same way._ 
+
+Steps are essentially global to their assembly This means steps can be used in any of the Features in that assembly.  Steps need to be well written and modular with a a well understood set of inputs in order for them to be truely reusable for different purposes.
+
+This graph shows two _Features_ sharing a couple of steps.
+```mermaid
+flowchart LR
+    subgraph FeatureDeposit [Make a Deposit]
+        direction TB
+        given1[Given I have a bank account]
+        when1[When I make a deposit]
+        then1[Then my balance should change by the deposit amount]
+    end
+
+    subgraph FeatureWithdrawl [Make a Withdrawl]
+        direction TB
+        given2[Given I have a bank account]
+        when2[When I make a withdrawl]
+        then2[Then my balance should change by the deposit amount]
+    end
+
+    subgraph Steps 
+        direction TB
+        givenBankAccount[Given I have a bank account]
+        whenDeposit[When I make a deposit]
+        whenWithdrawl[When I make a withdrawl]
+        thenBalance[Then my balance should change by the deposit amount]
+    end
+
+    given1 --> givenBankAccount
+    given2 --> givenBankAccount
+    when1 --> whenDeposit
+    when2 --> whenWithdrawl
+    then1 --> thenBalance
+    then2 --> thenBalance
+
+```
+
+The `Given`, `When` and `Then` syntax in `Features` must be **exactly** the same in order for SpecFlow to recognize them as the same step function.    
+
+
 
 ## Setup
 ### Visual Studio
