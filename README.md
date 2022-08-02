@@ -233,6 +233,13 @@ BDD with SpecFlow
 * https://specflow.org/ C# BDD testing framework
 * https://specflow.org/bdd/turn-specifications-into-automated-acceptance-tests/ 
 * https://www.automatetheplanet.com/handling-parameters-specflow/ advanced SpecFlow parameter handling
+* https://docs.specflow.org/projects/specflow/en/latest/Bindings/Sharing-Data-between-Bindings.html
+* https://docs.specflow.org/projects/specflow/en/latest/Bindings/ScenarioContext.html
+
+SpecFlow IDE Integration
+* https://docs.specflow.org/projects/specflow/en/latest/visualstudio/Visual-Studio-Integration.html
+* https://docs.specflow.org/projects/specflow/en/latest/Rider/rider-installation.html
+* https://docs.specflow.org/projects/specflow/en/latest/vscode/vscode-specflow.html
 
 Web Testing
 * https://www.selenium.dev/ Web UI testing
