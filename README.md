@@ -106,27 +106,34 @@ Steps are essentially global to their assembly This means steps can be used in a
 This graph shows two _Features_ sharing a couple of steps.
 ```mermaid
 flowchart LR
-    subgraph FeatureDeposit [Make a Deposit]
-        direction TB
-        given1[Given I have a bank account]
-        when1[When I make a deposit]
-        then1[Then my balance should change by the deposit amount]
+    subgraph FeatureBankTransactions[Feature<br/>]
+        subgraph ScenarioDeposit[Scenario Make a Deposit]
+            direction TB
+            given1[Given I have a bank account]
+            when1[When I make a deposit]
+            then1[Then my balance should change by the transaction amount]
+        end
+    
+        subgraph ScenarioWithdrawl[Scenario Make a Withdrawl]
+            direction TB
+            given2[Given I have a bank account]
+            when2[When I make a withdrawl]
+            then2[Then my balance should change by the transaction amount]
+        end
     end
 
-    subgraph FeatureWithdrawl [Make a Withdrawl]
-        direction TB
-        given2[Given I have a bank account]
-        when2[When I make a withdrawl]
-        then2[Then my balance should change by the deposit amount]
-    end
-
-    subgraph Steps 
+    subgraph Steps
         direction TB
         givenBankAccount[Given I have a bank account]
         whenDeposit[When I make a deposit]
         whenWithdrawl[When I make a withdrawl]
-        thenBalance[Then my balance should change by the deposit amount]
+        thenBalance[Then my balance should change by the transaction amount]
     end
+
+    subgraph Context[Scenario Context]
+    end
+    
+    click Context "https://docs.specflow.org/projects/specflow/en/latest/Bindings/ScenarioContext.html" "SpecFlow Scenario Context Documentation"
 
     given1 --> givenBankAccount
     given2 --> givenBankAccount
@@ -134,6 +141,11 @@ flowchart LR
     when2 --> whenWithdrawl
     then1 --> thenBalance
     then2 --> thenBalance
+
+    givenBankAccount <-.-> Context
+    whenDeposit <-.-> Context 
+    whenWithdrawl <-.-> Context
+    thenBalance <-.-> Context
 
 ```
 
@@ -235,6 +247,8 @@ BDD with SpecFlow
 * https://www.automatetheplanet.com/handling-parameters-specflow/ advanced SpecFlow parameter handling
 * https://docs.specflow.org/projects/specflow/en/latest/Bindings/Sharing-Data-between-Bindings.html
 * https://docs.specflow.org/projects/specflow/en/latest/Bindings/ScenarioContext.html
+* https://docs.specflow.org/projects/specflow/en/latest/Bindings/Asynchronous-Bindings.html
+* https://docs.specflow.org/projects/specflow/en/latest/Bindings/SpecFlow-Assist-Helpers.html
 
 SpecFlow IDE Integration
 * https://docs.specflow.org/projects/specflow/en/latest/visualstudio/Visual-Studio-Integration.html
