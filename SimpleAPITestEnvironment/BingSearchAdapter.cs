@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Net;
 
 namespace SimpleAPITestEnvironment
 {
@@ -15,10 +14,10 @@ namespace SimpleAPITestEnvironment
         private string responseJson;
         private JObject responseJObject;
 
-        public BingSearchAdapter(string endpoint, string subscriptionKey)
+        public BingSearchAdapter(ISearchEndpoint endpointConfig)
         {
-            this.endpoint = endpoint;
-            this.subscriptionKey = subscriptionKey;
+            this.endpoint = endpointConfig.ApiEndpoint();
+            this.subscriptionKey = endpointConfig.SubscriptionKey();
             this.responseJson = "";
             this.responseJObject = new JObject();
             this.responseMessage = null!;

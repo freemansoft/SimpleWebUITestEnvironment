@@ -12,17 +12,22 @@ namespace SimpleAPITestEnvironment
     using System.Text;
     public class BingApiSearchTest
     {
-        // Add your Bing Search V7 subscription key and endpoint to your environment variables - .runsettings if running in visual studio
-        static string subscriptionKey = Environment.GetEnvironmentVariable("BING_SEARCH_V7_SUBSCRIPTION_KEY") ?? "";
-        static string endpoint = Environment.GetEnvironmentVariable("BING_SEARCH_V7_ENDPOINT") + "/v7.0/search";
-
         const string query = "facebook";
         const string queryDomainExpected = "www.facebook.com";
 
+        ISearchAdapter adapter;
 
+        ISearchEndpoint endpointConfig;
+
+        /// <summary>
+        /// hardwired to bing right now
+        /// </summary>
         [SetUp]
         public void Setup()
         {
+            endpointConfig = new BingSearchEndpoint();
+            adapter = new BingSearchAdapter(endpointConfig);
+
         }
 
         /// <summary>
@@ -34,7 +39,6 @@ namespace SimpleAPITestEnvironment
             Console.OutputEncoding = Encoding.UTF8;
             Console.WriteLine("Searching the Web for: " + query);
 
-            ISearchAdapter adapter = new BingSearchAdapter(endpoint, subscriptionKey);
             HttpResponseMessage response = adapter.RunSearch(query, false);
             // Create a dictionary to store relevant headers and have the utility log them
             Dictionary<String, IEnumerable<string>> relevantHeaders = adapter.GetVendorHeaders(true);

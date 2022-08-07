@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json.Linq;
-using System.Net;
 
 namespace SimpleAPITestEnvironment
 {
+    /// <summary>
+    /// Class defines context reqired to run all of these tests
+    /// </summary>
     public interface ISearchAdapter
     {
         public HttpResponseMessage RunSearch(String query, bool logResponse);

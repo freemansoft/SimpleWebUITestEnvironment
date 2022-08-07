@@ -1,29 +1,26 @@
 using Newtonsoft.Json.Linq;
 using SimpleAPITestEnvironment;
 
-
 namespace SimpleApiBDDTestEnvironment.StepDefinitions
 {
     [Binding]
     public class BDDDrivenSearchEnginesStepDefinitions
     {
-        // Add your Bing Search V7 subscription key and endpoint to your environment variables - .runsettings if running in visual studio
-        static string subscriptionKey = Environment.GetEnvironmentVariable("BING_SEARCH_V7_SUBSCRIPTION_KEY") ?? "";
-        static string endpoint = (Environment.GetEnvironmentVariable("BING_SEARCH_V7_ENDPOINT") ?? "") + "/v7.0/search";
-
         private ScenarioContext _scenarioContext;
+        private ISearchEndpoint _endpointConfig;
 
-        public BDDDrivenSearchEnginesStepDefinitions(ScenarioContext scenarioContext)
+        public BDDDrivenSearchEnginesStepDefinitions(ScenarioContext scenarioContext, BingSearchEndpoint endpointConfig)
         {
             _scenarioContext = scenarioContext;
+            _endpointConfig = endpointConfig;
         }
 
         [Given(@"I search the internet using site ""([^""]*)""")]
         public void GivenISearchTheInternetUsingSite(string site)
         {
-            //We don't have a Google test class yet
+            //We don't have a Google test class yet - this should be a factory
             site.Should().Be("bing");
-            _scenarioContext.Set<ISearchAdapter>(new BingSearchAdapter(endpoint, subscriptionKey));
+            _scenarioContext.Set<ISearchAdapter>(new BingSearchAdapter(_endpointConfig));
         }
 
         [When(@"I use the term ""([^""]*)""")]
