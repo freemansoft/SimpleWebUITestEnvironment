@@ -26,7 +26,7 @@ Scenario: Example - Search with Google
 	And My search term should be in the title bar
 ```
 
-### Another Feature using the same steps
+### Another Scenario using the same steps
 This Scenario is virtually the same and uses the exact same test steps.  SpecFlow steps are parameterized so that this scenario can use the exact same steps as the previous one just passing different values for the parameters.
 
 ```gherkin
@@ -61,13 +61,25 @@ The Scenario above can be automated using SpecFlow. The Specflow VS extension ha
 
 ```mermaid
 graph TD
-    Test
-    Test(XUnit/Nunit Specflow Generated Test<br/>in generated test file);
-    Test --> GivenStep(Step: Given<br/>in .cs step file);
-    Test --> WhenStep(Step: When<br/>in .cs step file);
-    Test --> ThenStep(Step: Then<br/>in .cs step file);
-    Test --> Then2Step(Step: And Then<br/>in .cs step file);
-```
+    subgraph FeaturePieces[A Feature]
+    Feature(Specflow Feature containing multiple Scenarios)
+    FeatureTests(Specflow Generates a test class for each Feature containing one Test for each Scenario)
+        subgraph TestPieces[A Scenario]
+            Test(A Specflow Generated XUnit/Nunit Test in a code generated Feature .cs)
+            subgraph StepPieces[Developer Generated Steps]
+                GivenStep>Step: Given<br/>in .cs step file]
+                WhenStep>Step: When<br/>in .cs step file]
+                ThenStep>Step: Then<br/>in .cs step file]
+                Then2Step>Step: And Then<br/>in .cs step file]
+            end
+        end
+    end
+       Feature -.-> FeatureTests -.-> Test
+                Test --> GivenStep
+                Test --> WhenStep
+                Test --> ThenStep
+                Test --> Then2Step
+ ```
 
 
 ## BDD Test Execution Path 
