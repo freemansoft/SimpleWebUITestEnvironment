@@ -3,7 +3,7 @@
 Example C# used as a starting point for a TDD / BDD lab.
 
 1. UI BDD tests using Selenium tests that operate against search web sites. 
-1. Web API BDD tests that operate against search APIs.
+1. Web API BDD tests that operate against search APIs. _This is a work in progress and is missing some of the Factory and other pattern pieces_
 1. An NUnit API test that operates against search APIs. This is used to shake out the API search engine adapter classes.
 
 This project will eventually add standard non-BDD NUnit / Selenium integration tests.
