@@ -5,6 +5,9 @@ namespace SimpleAPITestEnvironment
 {
     using FluentAssertions;
     using Newtonsoft.Json.Linq;
+    using SimpleAPITestEnvironment.SearchAdapters;
+    using SimpleAPITestEnvironment.SearchConfiguration;
+
     /// https://docs.microsoft.com/en-us/bing/search-apis/bing-web-search/quickstarts/rest/csharp
 
     using System;

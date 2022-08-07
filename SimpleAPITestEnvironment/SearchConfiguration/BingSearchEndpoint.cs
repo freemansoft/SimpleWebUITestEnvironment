@@ -1,4 +1,4 @@
-﻿namespace SimpleAPITestEnvironment
+﻿namespace SimpleAPITestEnvironment.SearchConfiguration
 {
     // Add your Bing Search V7 subscription key and endpoint to your environment variables - .runsettings if running in visual studio
     public class BingSearchEndpoint : ISearchEndpoint

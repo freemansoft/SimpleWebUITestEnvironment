@@ -1,5 +1,6 @@
 using Newtonsoft.Json.Linq;
-using SimpleAPITestEnvironment;
+using SimpleAPITestEnvironment.SearchAdapters;
+using SimpleAPITestEnvironment.SearchConfiguration;
 
 namespace SimpleApiBDDTestEnvironment.StepDefinitions
 {

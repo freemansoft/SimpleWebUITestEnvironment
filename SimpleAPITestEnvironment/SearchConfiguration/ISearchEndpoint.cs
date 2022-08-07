@@ -1,4 +1,4 @@
-﻿namespace SimpleAPITestEnvironment
+﻿namespace SimpleAPITestEnvironment.SearchConfiguration
 {
     /// <summary>
     /// This functionality should be injected via Factory

@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SimpleAPITestEnvironment.SearchConfiguration;
 
-namespace SimpleAPITestEnvironment
+namespace SimpleAPITestEnvironment.SearchAdapters
 {
     public class BingSearchAdapter : ISearchAdapter
     {
@@ -16,14 +18,14 @@ namespace SimpleAPITestEnvironment
 
         public BingSearchAdapter(ISearchEndpoint endpointConfig)
         {
-            this.endpoint = endpointConfig.ApiEndpoint();
-            this.subscriptionKey = endpointConfig.SubscriptionKey();
-            this.responseJson = "";
-            this.responseJObject = new JObject();
-            this.responseMessage = null!;
+            endpoint = endpointConfig.ApiEndpoint();
+            subscriptionKey = endpointConfig.SubscriptionKey();
+            responseJson = "";
+            responseJObject = new JObject();
+            responseMessage = null!;
         }
 
-        public HttpResponseMessage RunSearch(String query, bool logResponse)
+        public HttpResponseMessage RunSearch(string query, bool logResponse)
         {
             // Construct the URI of the search request
             var uriQuery = endpoint + "?q=" + Uri.EscapeDataString(query) + "&mkt=" + "en-US" + "&responseFilter=" + Uri.EscapeDataString("webpages");
@@ -52,7 +54,7 @@ namespace SimpleAPITestEnvironment
 
         }
 
-        public Dictionary<String, IEnumerable<string>> GetVendorHeaders(bool logThem)
+        public Dictionary<string, IEnumerable<string>> GetVendorHeaders(bool logThem)
         {
             if (responseMessage == null)
             {
