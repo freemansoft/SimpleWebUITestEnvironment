@@ -63,22 +63,25 @@ The Scenario above can be automated using SpecFlow. The Specflow VS extension ha
 graph TD
     subgraph FeaturePieces[A Feature]
     Feature(Specflow Feature containing multiple Scenarios)
-    FeatureTests(Specflow Generates a test class for each Feature containing one Test for each Scenario)
-        subgraph TestPieces[A Scenario]
+    FeatureTests(Specflow generated Feature test class containing one Test for each Scenario)
+        subgraph TD TestPieces[A Scenario]
             Test(A Specflow Generated XUnit/Nunit Test in a code generated Feature .cs)
-            subgraph StepPieces[Developer Generated Steps]
-                GivenStep>Step: Given<br/>in .cs step file]
-                WhenStep>Step: When<br/>in .cs step file]
-                ThenStep>Step: Then<br/>in .cs step file]
-                Then2Step>Step: And Then<br/>in .cs step file]
+            subgraph StepFile[Step File .cs]
+                subgraph StepPieces[Developer Generated Steps]
+                    GivenStep>Step: Given<br/>in .cs step file]
+                    WhenStep>Step: When<br/>in .cs step file]
+                    ThenStep>Step: Then<br/>in .cs step file]
+                    Then2Step>Step: And Then<br/>in .cs step file]
+                end
             end
+            ScenarioContext[Scenario Scope<br/>ScenarioContext<br/>POCOs]
         end
     end
-       Feature -.-> FeatureTests -.-> Test
-                Test --> GivenStep
-                Test --> WhenStep
-                Test --> ThenStep
-                Test --> Then2Step
+    Feature -.- FeatureTests -.- Test
+    Test --- GivenStep
+    Test --- WhenStep
+    Test --- ThenStep
+    Test --- Then2Step
  ```
 
 
